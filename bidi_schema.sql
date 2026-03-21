@@ -2,6 +2,8 @@ DROP DATABASE IF EXISTS bidi_db;
 CREATE DATABASE bidi_db;
 USE bidi_db;
 
+-- test
+
 CREATE TABLE Project (
 
 );
