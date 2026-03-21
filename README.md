@@ -18,7 +18,7 @@ this lists all branches and show which you are currently at: `git branch`
 
 create new branch, use ticket name as a branch name: `git branch ticket_name`
 
-go to the new branch: `git checkout branch_name`
+switch branches by: `git checkout branch_name`
 
 once you are done:
 
