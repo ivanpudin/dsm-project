@@ -37,7 +37,7 @@ CREATE TABLE Customer (
 CREATE TABLE Employee (
     EmpID INT PRIMARY KEY,
     name VARCHAR(150) NOT NULL,
-    email VARCHAR(150) UNIQUE NOT NULL
+    email VARCHAR(255) UNIQUE NOT NULL
 );
 
 -- startDate and deadline technically belong to the commissions relationship conceptually but in the physical schema they live here
