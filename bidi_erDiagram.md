@@ -1,3 +1,4 @@
+```mermaid
 erDiagram
     
     Project {
@@ -74,3 +75,4 @@ erDiagram
     
     Has }|--|| Employee : "possesses"
     Has }|--|| Role : "assigned to"
+```
