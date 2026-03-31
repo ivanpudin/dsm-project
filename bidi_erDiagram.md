@@ -60,6 +60,7 @@ erDiagram
     Has {
         int EmpID PK, FK
         int RoleID PK, FK
+        string Description
     }
 
     Project }|--|| Customer : "Commissions"
