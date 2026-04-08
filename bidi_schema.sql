@@ -17,7 +17,7 @@ DROP TABLE IF EXISTS UserGroup CASCADE;
 CREATE TABLE Location (
     LID INT PRIMARY KEY,
     address VARCHAR(255) NOT NULL,
-    country VARCHAR(100) NOT NULL
+    country VARCHAR(100) NOT NULL DEFAULT 'Finland'
 );
 
 CREATE TABLE Department (
@@ -56,18 +56,19 @@ CREATE TABLE Employee (
 CREATE TABLE Project (
     PrID INT PRIMARY KEY,
     name VARCHAR(150) NOT NULL,
-    budget DECIMAL(19,4),
+    budget DECIMAL(19,4) DEFAULT 0.0000 CHECK (budget >= 0),
     -- We assume that startDate and deadline are nullable and can be decided later on.
     startDate DATE,
     deadline DATE,
     CID INT NOT NULL,
-    FOREIGN KEY (CID) REFERENCES Customer(CID) ON DELETE RESTRICT ON UPDATE CASCADE
+    FOREIGN KEY (CID) REFERENCES Customer(CID) ON DELETE RESTRICT ON UPDATE CASCADE,
+    CHECK (deadline >= startDate)
 );
 
 CREATE TABLE Works (
     PrID INT,
     EmpID INT,
-    started DATE,
+    started DATE DEFAULT CURRENT_DATE,
     PRIMARY KEY (PrID, EmpID),
     FOREIGN KEY (PrID) REFERENCES Project(PrID) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (EmpID) REFERENCES Employee(EmpID) ON DELETE CASCADE ON UPDATE CASCADE
