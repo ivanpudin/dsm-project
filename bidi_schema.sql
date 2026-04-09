@@ -89,3 +89,115 @@ CREATE TABLE PartOf (
     FOREIGN KEY (EmpID) REFERENCES Employee(EmpID) ON DELETE CASCADE ON UPDATE CASCADE,
     FOREIGN KEY (GrID) REFERENCES UserGroup(GrID) ON DELETE RESTRICT ON UPDATE CASCADE
 );
+
+
+
+-- TRIGGERS
+
+-- Trigger 1: Make sure all projects have at least one employee assigned to them
+CREATE OR REPLACE FUNCTION check_project_has_workers()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1 FROM Works WHERE PrID = OLD.PrID
+    ) THEN
+        RAISE EXCEPTION 'Project % must have at least one employee', OLD.PrID;
+    END IF;
+    RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_project_must_have_workers
+AFTER DELETE ON Works
+FOR EACH ROW
+EXECUTE FUNCTION check_project_has_workers();
+
+-- Trigger 2: Make sure there are no employees that are not assigned to any project
+CREATE OR REPLACE FUNCTION check_employee_has_project()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1 FROM Works WHERE EmpID = OLD.EmpID
+    ) THEN
+        RAISE EXCEPTION 'Employee % must have work on at least one project', OLD.EmpID;
+    END IF;
+    RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_employee_must_have_project
+AFTER DELETE ON Works
+FOR EACH ROW
+EXECUTE FUNCTION check_employee_has_project();
+
+
+--Trigger 3: Make sure each employee belongs to at least one group
+CREATE OR REPLACE FUNCTION check_employee_group()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1 FROM PartOf WHERE EmpID = OLD.EmpID
+    ) THEN
+        RAISE EXCEPTION 'Employee % must belong to at least one group', OLD.EmpID;
+    END IF;
+    RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_employee_must_have_group
+AFTER DELETE ON PartOf
+FOR EACH ROW
+EXECUTE FUNCTION check_employee_group();
+
+--Trigger 4: Make sure every employee has at least one role
+CREATE OR REPLACE FUNCTION check_employee_role()
+RETURNS TRIGGER AS $$
+BEGIN
+    IF NOT EXISTS (
+        SELECT 1 FROM Has WHERE EmpID = OLD.EmpID
+    ) THEN
+        RAISE EXCEPTION 'Employee % must have at least one role', OLD.EmpID;
+    END IF;
+    RETURN OLD;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trigger_employee_must_have_role
+AFTER DELETE ON PartOf
+FOR EACH ROW
+EXECUTE FUNCTION check_employee_role();
+
+
+--Trigger 5: Make sure "started" date is valid
+CREATE OR REPLACE FUNCTION check_work_started()
+RETURNS TRIGGER AS $$
+DECLARE
+    project_start DATE;
+    project_deadline DATE;
+BEGIN
+    SELECT startDate, deadline
+    INTO project_start, project_deadline
+    FROM Project
+    WHERE PrID = NEW.PrID;
+
+    -- Check startDate constraint
+    IF project_start IS NOT NULL AND NEW.started < project_start THEN
+        RAISE EXCEPTION
+        'Work cannot start before the project''s start date (%)', project_start;
+    END IF;
+
+    -- Check deadline constraint
+    IF project_deadline IS NOT NULL AND NEW.started > project_deadline THEN
+        RAISE EXCEPTION
+        'Work cannot start after project deadline (%)', project_deadline;
+    END IF;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_validate_work_started
+BEFORE INSERT OR UPDATE ON Works
+FOR EACH ROW
+EXECUTE FUNCTION check_work_started();
+
