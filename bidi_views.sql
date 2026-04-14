@@ -1,0 +1,47 @@
+--creating view
+
+CREATE OR REPLACE VIEW EmployeeProjectCustomerView AS
+SELECT e.name AS employee_name,
+       p.name AS project_name,
+       c.name AS customer_name
+FROM employee e
+JOIN works w ON e.EmpID = w.EmpID
+JOIN project p ON w.PrID = p.PrID
+JOIN customer c ON p.CID = c.CID;
+
+-- use the view
+SELECT * FROM EmployeeProjectCustomerView;
+
+
+--insert examples
+
+-- create new employee
+INSERT INTO employee (EmpID, name, email, DepID)
+VALUES (2, 'Test User', 'test@bidi.fi', 1);
+
+-- assign employee to project
+INSERT INTO works (PrID, EmpID)
+VALUES (100, 2);
+
+-- now visible in the view
+SELECT * FROM EmployeeProjectCustomerView;
+
+
+--update examples
+
+-- update employee name
+UPDATE employee
+SET name = 'Updated User'
+WHERE EmpID = 2;
+
+-- reflected in the view
+SELECT * FROM EmployeeProjectCustomerView;
+
+--delete examples
+
+-- remove assignment
+DELETE FROM works
+WHERE EmpID = 2 AND PrID = 100;
+
+-- reflected in the view
+SELECT * FROM EmployeeProjectCustomerView;
