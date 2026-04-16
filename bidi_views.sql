@@ -22,7 +22,11 @@ INSERT INTO Department (DepID, name, LID) VALUES
 -- create new employee
 INSERT INTO employee (EmpID, name, email, DepID)
 VALUES (2, 'Test User', 'test@bidi.fi', 1);
+INSERT INTO Customer (CID, name, email, LID) VALUES 
+(101, 'Terveyskeskus Alpha', 'contact@terveysalpha.fi', 1);
 
+INSERT INTO Project (PrID, name, budget, startDate, deadline, CID) VALUES 
+(100, 'Patient Portal v2.0', 150000.00, '2024-01-15', '2024-08-30', 101);
 -- assign employee to project
 INSERT INTO works (PrID, EmpID)
 VALUES (100, 2);
