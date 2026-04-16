@@ -14,7 +14,11 @@ SELECT * FROM EmployeeProjectCustomerView;
 
 
 --insert examples
+INSERT INTO Location (LID, address, country) VALUES 
+(1, 'Mannerheimintie 1, Helsinki', 'Finland');
 
+INSERT INTO Department (DepID, name, LID) VALUES 
+(1, 'Software Engineering', 1);
 -- create new employee
 INSERT INTO employee (EmpID, name, email, DepID)
 VALUES (2, 'Test User', 'test@bidi.fi', 1);
