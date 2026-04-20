@@ -1,5 +1,5 @@
 -- Clean up previously created roles/users
-DROP OWNED BY alice_pm CASCADE;
+REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA public FROM bidi_project_manager;
 DROP OWNED BY bob_analyst CASCADE;
 DROP ROLE IF EXISTS alice_pm;
 DROP ROLE IF EXISTS bob_analyst;
