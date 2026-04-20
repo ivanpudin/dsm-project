@@ -1,6 +1,6 @@
 -- Clean up previously created roles/users
 REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA public FROM bidi_project_manager;
-DROP OWNED BY bob_analyst CASCADE;
+REVOKE ALL PRIVILEGES ON ALL TABLES IN SCHEMA public FROM bidi_data_analyst;
 DROP ROLE IF EXISTS alice_pm;
 DROP ROLE IF EXISTS bob_analyst;
 DROP ROLE IF EXISTS bidi_project_manager;
