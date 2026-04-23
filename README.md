@@ -36,6 +36,14 @@ once you push the changes, create pull request to merge your branch into main
 
 # How to run the app
 
+First, create .env file inside server folder
+
+Add credentials for at least admin user to this file:
+
+`ADMIN_USERNAME=postgres`
+
+`ADMIN_PASSWORD="password"`
+
 in root folder:
 
 `npm install`
