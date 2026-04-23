@@ -2,6 +2,14 @@ import { Box, Card, type CardProps } from '@mui/material'
 import { alpha } from '@mui/material/styles'
 import type { ReactNode } from 'react'
 
+
+/**
+ * Styling templates used for MUI components
+ * They override most of the default properties
+ * Made to resemble 'liquid glass' concept
+ */
+
+
 export const LiquidWrapper = ({ children }: { children: ReactNode }) => (
   <Box sx={{ 
     p: { xs: 2, md: 4 }, 

@@ -87,6 +87,14 @@ function Header() {
             >
               Projects
             </Button>
+            <Button
+              key="Queries"
+              component={Link}
+              to="/queries"
+              sx={{ my: 2, color: 'white', display: 'block', textTransform: 'none' }}
+            >
+              SQL
+            </Button>
           </Box>
 
           <Box>

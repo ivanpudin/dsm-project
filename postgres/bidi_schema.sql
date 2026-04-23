@@ -15,30 +15,30 @@ DROP TABLE IF EXISTS UserGroup CASCADE;
 -- However, you can keep this in mind for ticket 5.2
 
 CREATE TABLE Location (
-    LID INT PRIMARY KEY,
+    LID SERIAL PRIMARY KEY,
     address VARCHAR(255) NOT NULL,
     country VARCHAR(100) NOT NULL DEFAULT 'Finland'
 );
 
 CREATE TABLE Department (
-    DepID INT PRIMARY KEY,
+    DepID SERIAL PRIMARY KEY,
     name VARCHAR(100) NOT NULL,
     LID INT NOT NULL,
     FOREIGN KEY (LID) REFERENCES Location(LID) ON DELETE RESTRICT ON UPDATE CASCADE
 );
 
 CREATE TABLE Role (
-    RoleID INT PRIMARY KEY,
+    RoleID SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE UserGroup (
-    GrID INT PRIMARY KEY,
+    GrID SERIAL PRIMARY KEY,
     name VARCHAR(50) NOT NULL
 );
 
 CREATE TABLE Customer (
-    CID INT PRIMARY KEY,
+    CID SERIAL PRIMARY KEY,
     name VARCHAR(150) NOT NULL,
     email VARCHAR(150) UNIQUE NOT NULL,
     LID INT NOT NULL,
@@ -46,7 +46,7 @@ CREATE TABLE Customer (
 );
 
 CREATE TABLE Employee (
-    EmpID INT PRIMARY KEY,
+    EmpID SERIAL PRIMARY KEY,
     name VARCHAR(150) NOT NULL,
     email VARCHAR(255) UNIQUE NOT NULL,
     DepID INT NOT NULL,
@@ -54,7 +54,7 @@ CREATE TABLE Employee (
 );
 
 CREATE TABLE Project (
-    PrID INT PRIMARY KEY,
+    PrID SERIAL PRIMARY KEY,
     name VARCHAR(150) NOT NULL,
     budget DECIMAL(19,4) DEFAULT 0.0000 CHECK (budget >= 0),
     -- We assume that startDate and deadline are nullable and can be decided later on.

@@ -16,7 +16,7 @@ export const useColorMode = () => useContext(ColorModeContext)
 export const MyThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const [mode, setMode] = useState<'light' | 'dark'>(() => {
     const savedMode = localStorage.getItem('themeMode')
-    return (savedMode as 'light' | 'dark') || 'light'
+    return (savedMode as 'light' | 'dark') || 'dark'
   })
 
   // Memorize theme

@@ -3,6 +3,7 @@ import path from "path"
 import router from "./src/routes/index.js"
 import projectRouter from "./src/routes/project.js"
 import employeeRouter from "./src/routes/employee.js"
+import customerRouter from "./src/routes/customer.js"
 import cors, { type CorsOptions } from "cors"
 import { fileURLToPath } from "url"
 import dotenv from "dotenv"
@@ -35,6 +36,7 @@ app.use(express.static(path.join(__dirname, "../public")))
 app.use("/", router)
 app.use("/api/project", projectRouter)
 app.use("/api/employee", employeeRouter)
+app.use("/api/customer", customerRouter)
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`)
