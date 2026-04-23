@@ -1,4 +1,4 @@
-import { createContext, useState, useContext, type ReactNode } from "react"
+import { createContext, useState, useContext, useCallback, type ReactNode } from "react"
 import { Snackbar, Alert, type AlertColor } from "@mui/material"
 
 /**
@@ -20,9 +20,9 @@ const NotificationContext = createContext<NotificationContextType | undefined>(u
 export const NotificationProvider = ({ children }: { children: ReactNode }) => {
   const [status, setStatus] = useState<Status | null>(null)
 
-  const showNotification = (message: string, severity: AlertColor = "error") => {
-    setStatus({ message, severity })
-  }
+  const showNotification = useCallback((message: string, severity: AlertColor = "error") => {
+      setStatus({ message, severity })
+    }, [])
 
   return (
     <NotificationContext.Provider value={{ showNotification }}>
