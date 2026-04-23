@@ -31,3 +31,23 @@ once you are done:
 after that you can chekout back to the main branch and delete your branch locally: `git branch -d branch_name`
 
 once you push the changes, create pull request to merge your branch into main
+
+
+
+# How to run the app
+
+in root folder:
+
+`npm install`
+
+(this installs node modules into both client and server folders; may take 5-10 minutes)
+
+after you install, run the following in 2 different terminals
+
+`npm run dev:client`
+
+`npm run dev:server`
+
+Frontend is at: http://localhost:3000
+
+Backend is at: http://localhost:1234/
