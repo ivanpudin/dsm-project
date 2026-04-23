@@ -36,7 +36,7 @@ once you push the changes, create pull request to merge your branch into main
 
 # How to run the app
 
-First, create .env file inside server folder
+First, create .env file inside the server folder
 
 Add credentials for at least admin user to this file:
 
@@ -44,13 +44,23 @@ Add credentials for at least admin user to this file:
 
 `ADMIN_PASSWORD="password"`
 
-in root folder:
+Default role is admin, that's why it is required. However, if you want functionality for additional roles, you should also add the following:
+
+`ALICE_USERNAME=alice_pm`
+
+`ALICE_PASSWORD="pm_secure_pass"`
+
+`BOB_USERNAME=bob_analyst`
+
+`BOB_PASSWORD="analyst_secure_pass"`
+
+After you have created .env, execute the following in the root folder:
 
 `npm install`
 
 (this installs node modules into both client and server folders; may take 5-10 minutes)
 
-after you install, run the following in 2 different terminals
+after install, run the following in 2 different terminals
 
 `npm run dev:client`
 
