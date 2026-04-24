@@ -347,7 +347,7 @@ const Dashboard = () => {
             <Grid container spacing={3} justifyContent="center" alignItems="stretch">
               
               <Grid item xs={12} sm={10} md={3}>
-                <Box sx={{ ...glassPanelStyle, maxWidth: 200 }}>
+                <Box sx={{ ...glassPanelStyle, width: 200 }}>
                   <Typography variant="overline" color="text.secondary" fontWeight="bold">PROJECT CUSTOMER</Typography>
                   <Divider sx={{ my: 1, opacity: 0.3 }} />
                   <Typography variant="body1" fontWeight={600} sx={{ mt: 1 }}>
@@ -357,10 +357,10 @@ const Dashboard = () => {
               </Grid>
 
               <Grid item xs={12} sm={10} md={4.5}>
-                <Box sx={glassPanelStyle}>
+                <Box sx={{ ...glassPanelStyle, minWidth: 220 }}>
                   <Stack direction="row" justifyContent="space-between" alignItems="center">
                     <Typography variant="overline" color="text.secondary" fontWeight="bold">ASSIGNED EMPLOYEES</Typography>
-                    <Typography variant="caption" color="text.secondary" fontWeight={600}>{employees.length} Assigned</Typography>
+                    <Typography variant="caption" color="text.secondary" fontWeight={600}>({employees.length})</Typography>
                   </Stack>
                   <Divider sx={{ my: 1, opacity: 0.3 }} />
                   
