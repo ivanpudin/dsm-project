@@ -19,8 +19,8 @@ CREATE USER bob_analyst WITH PASSWORD 'analyst_secure_pass';
 GRANT bidi_project_manager TO alice_pm;
 GRANT bidi_data_analyst TO bob_analyst;
 
-grant usage on schema public to bidi_project_manager;
-grant usage on schema public to bidi_data_analyst;
+GRANT USAGE ON SCHEMA public TO bidi_project_manager;
+GRANT USAGE ON SCHEMA public TO bidi_data_analyst;
 
 -- give privileges
 -- Project Manager Privileges:
