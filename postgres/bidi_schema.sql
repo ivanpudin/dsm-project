@@ -95,3 +95,5 @@ CREATE INDEX idx_department_lid ON Department(LID);
 CREATE INDEX idx_customer_lid ON Customer(LID);
 CREATE INDEX idx_employee_depid ON Employee(DepID);
 CREATE INDEX idx_project_cid ON Project(CID);
+
+CREATE INDEX idx_works_empid ON Works(EmpID);
