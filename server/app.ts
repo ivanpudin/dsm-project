@@ -4,6 +4,11 @@ import router from "./src/routes/index.js"
 import projectRouter from "./src/routes/project.js"
 import employeeRouter from "./src/routes/employee.js"
 import customerRouter from "./src/routes/customer.js"
+import locationRouter from "./src/routes/location.js"
+import roleRouter from "./src/routes/role.js"
+import groupRouter from "./src/routes/group.js"
+import departmentRouter from "./src/routes/department.js"
+import queryRouter from "./src/routes/query.js"
 import cors, { type CorsOptions } from "cors"
 import { fileURLToPath } from "url"
 import dotenv from "dotenv"
@@ -37,6 +42,11 @@ app.use("/", router)
 app.use("/api/project", projectRouter)
 app.use("/api/employee", employeeRouter)
 app.use("/api/customer", customerRouter)
+app.use("/api/location", locationRouter)
+app.use("/api/role", roleRouter)
+app.use("/api/group", groupRouter)
+app.use("/api/department", departmentRouter)
+app.use("/api/query", queryRouter)
 
 app.listen(port, () => {
     console.log(`Server running on port ${port}`)

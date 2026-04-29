@@ -28,6 +28,7 @@ GRANT USAGE ON SCHEMA public TO bidi_data_analyst;
 GRANT SELECT, INSERT, UPDATE, DELETE ON Project, Customer, Works TO bidi_project_manager;
 -- Can only READ employee and department data (HR handles creation of employees)
 GRANT SELECT ON Employee, Department, Location TO bidi_project_manager;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO bidi_project_manager;
 
 -- Data Analyst Privileges:
 -- Can only READ data across the board for reporting purposes
