@@ -97,3 +97,27 @@ export const glassModalStyle = {
     : '0 24px 48px rgba(0,0,0,0.4)',
   p: 4
 }
+
+export const GlassPanel = ({ children, sx, ...props }: any) => (
+  <Box
+    {...props}
+    sx={{
+      bgcolor: (theme) => theme.palette.mode === 'light' 
+        ? alpha(theme.palette.background.paper, 0.5) 
+        : alpha(theme.palette.background.paper, 0.2),
+      backdropFilter: 'blur(24px)',
+      WebkitBackdropFilter: 'blur(24px)',
+      borderRadius: 4,
+      border: '1px solid',
+      borderColor: (theme) => theme.palette.mode === 'light' 
+        ? 'rgba(255, 255, 255, 0.7)' 
+        : alpha(theme.palette.divider, 0.2),
+      boxShadow: (theme) => theme.palette.mode === 'light' 
+        ? '0 8px 32px rgba(31, 38, 135, 0.08)' 
+        : '0 8px 32px rgba(0, 0, 0, 0.2)',
+      ...sx
+    }}
+  >
+    {children}
+  </Box>
+)

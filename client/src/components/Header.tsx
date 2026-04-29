@@ -15,34 +15,43 @@ import { useTheme } from '@mui/material/styles'
 import ArrowDropDownIcon from '@mui/icons-material/ArrowDropDown'
 import Brightness4Icon from '@mui/icons-material/Brightness4'
 import Brightness7Icon from '@mui/icons-material/Brightness7'
+import MenuIcon from '@mui/icons-material/Menu'
 import { useColorMode } from '../context/ThemeContext'
-
-
-/**
- * Global navigation and app controls
- * Renders the top AppBar containing the application logo, navigation links,
- * theme toggle and database role access control.
- */
-
 
 const DATABASE_ROLES = [
   { code: 'ADMIN', label: 'Admin' },
   { code: 'ALICE', label: 'Alice' },
-  { code: 'BOB', label: 'Bob' },
+  { code: 'BOB', label: 'Bob' }
+]
+
+const PAGES = [
+  { label: 'Dashboard', path: '/' },
+  { label: 'Projects', path: '/projects' },
+  { label: 'Customers', path: '/customers' },
+  { label: 'Employees', path: '/employees' }
 ]
 
 function Header() {
   const theme = useTheme()
   const colorMode = useColorMode()
 
+  const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null)
   const [anchorElRole, setAnchorElRole] = React.useState<null | HTMLElement>(null)
 
   const [selectedRole, setSelectedRole] = React.useState<string>(
     localStorage.getItem('appRole') || "ADMIN"
   )
 
+  const handleOpenNavMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorElNav(event.currentTarget)
+  }
+
   const handleOpenRoleMenu = (event: React.MouseEvent<HTMLElement>) => {
     setAnchorElRole(event.currentTarget)
+  }
+
+  const handleCloseNavMenu = () => {
+    setAnchorElNav(null)
   }
 
   const handleCloseRoleMenu = () => {
@@ -60,6 +69,7 @@ function Header() {
     <AppBar position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
+          {/* DESKTOP LOGO */}
           <Typography
             variant="h6"
             noWrap
@@ -67,39 +77,99 @@ function Header() {
             to="/"
             sx={{
               mr: 2,
-              display: 'flex',
+              display: { xs: 'none', sm: 'flex' },
               fontFamily: 'monospace',
               fontWeight: 700,
               letterSpacing: '.08rem',
               color: 'inherit',
-              textDecoration: 'none',
+              textDecoration: 'none'
             }}
           >
             BiDi
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: 'flex', justifyContent: 'flex-start', ml: { xs: 0, md: 2 } }}>
-            <Button
-              key="Home"
-              component={Link}
-              to="/"
-              sx={{ my: 2, color: 'white', display: 'block', textTransform: 'none' }}
+          {/* MOBILE NAV MENU */}
+          <Box sx={{ flexGrow: 1, display: { xs: 'flex', sm: 'none' } }}>
+            <IconButton
+              size="large"
+              aria-label="open navigation menu"
+              aria-controls="menu-appbar"
+              aria-haspopup="true"
+              onClick={handleOpenNavMenu}
+              color="inherit"
             >
-              Projects
-            </Button>
-            <Button
-              key="Queries"
-              component={Link}
-              to="/queries"
-              sx={{ my: 2, color: 'white', display: 'block', textTransform: 'none' }}
+              <MenuIcon />
+            </IconButton>
+            <Menu
+              id="menu-appbar"
+              anchorEl={anchorElNav}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left'
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'left'
+              }}
+              open={Boolean(anchorElNav)}
+              onClose={handleCloseNavMenu}
+              sx={{
+                display: { xs: 'block', sm: 'none' }
+              }}
             >
-              SQL
-            </Button>
+              {PAGES.map((page) => (
+                <MenuItem 
+                  key={page.label} 
+                  component={Link} 
+                  to={page.path} 
+                  onClick={handleCloseNavMenu}
+                >
+                  <Typography textAlign="center">{page.label}</Typography>
+                </MenuItem>
+              ))}
+            </Menu>
           </Box>
 
+          {/* MOBILE LOGO */}
+          <Typography
+            variant="h6"
+            noWrap
+            component={Link}
+            to="/"
+            sx={{
+              mr: 2,
+              display: { xs: 'flex', sm: 'none' },
+              flexGrow: 1,
+              fontFamily: 'monospace',
+              fontWeight: 700,
+              letterSpacing: '.08rem',
+              color: 'inherit',
+              textDecoration: 'none'
+            }}
+          >
+            BiDi
+          </Typography>
+
+          {/* DESKTOP NAV LINKS */}
+          <Box sx={{ flexGrow: 1, display: { xs: 'none', sm: 'flex' }, ml: 2 }}>
+            {PAGES.map((page) => (
+              <Button
+                key={page.label}
+                component={Link}
+                to={page.path}
+                onClick={handleCloseNavMenu}
+                sx={{ my: 2, color: 'white', display: 'block', textTransform: 'none' }}
+              >
+                {page.label}
+              </Button>
+            ))}
+          </Box>
+
+          {/* CONTROLS */}
           <Box>
             <IconButton onClick={colorMode.toggleColorMode} color="inherit">
-                {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
+              {theme.palette.mode === 'dark' ? <Brightness7Icon /> : <Brightness4Icon />}
             </IconButton>
           </Box>
 
@@ -113,17 +183,11 @@ function Header() {
             </Button>
             <Menu
               sx={{ mt: '45px' }}
-              id="menu-language-switcher"
+              id="menu-role-switcher"
               anchorEl={anchorElRole}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
+              anchorOrigin={{ vertical: 'top', horizontal: 'right' }}
               keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
+              transformOrigin={{ vertical: 'top', horizontal: 'right' }}
               open={Boolean(anchorElRole)}
               onClose={handleCloseRoleMenu}
             >
@@ -143,4 +207,5 @@ function Header() {
     </AppBar>
   )
 }
+
 export default Header
