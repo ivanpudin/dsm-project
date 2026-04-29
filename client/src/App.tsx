@@ -1,7 +1,9 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import Header from './components/Header'
 import Dashboard from './components/Dashboard'
-import Queries from './components/Queries'
+import Projects from './components/Projects'
+import Customers from './components/Customers'
+import Employees from './components/Employees'
 
 function App() {
   return (
@@ -9,7 +11,9 @@ function App() {
       <Header />
       <Routes>
         <Route path="/" element={<Dashboard />} />
-        <Route path="/queries" element={<Queries />} />
+        <Route path="/projects" element={<Projects />} />
+        <Route path="/customers" element={<Customers />} />
+        <Route path="/employees" element={<Employees />} />
       </Routes>
     </BrowserRouter>
   )
