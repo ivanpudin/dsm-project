@@ -2,6 +2,12 @@
 
 A lightweight ERP application made for BiDi, that includes project tracking, personnel allocation, customer relations, and role-based database access for educational purposes. The app is built using React, Node.js & Express, and PostgreSQL.
 
+<img width="1919" height="947" alt="Projects View" src="https://github.com/user-attachments/assets/ceedbf6e-750f-41ac-aaa2-2f28f4140e52" />
+
+<img width="1919" height="946" alt="Employee Creation View" src="https://github.com/user-attachments/assets/f61722a9-7ad4-4667-b94b-27c20213bdfe" />
+
+<img width="1919" height="947" alt="Employee Allocation View" src="https://github.com/user-attachments/assets/e251bb56-056f-4b4f-a3f6-a53d14d9ee3d" />
+
 # Getting Started
 
 to download repo: `git clone https://github.com/ivanpudin/dsm-project.git`
