@@ -1,6 +1,6 @@
 # Overview
 
-A lightweight ERP application made for BiDi, that includes project tracking, personnel allocation, customer relations, and role-based database access for educational purposes. The app is built using React, Node.js & Express, and PostgreSQL.
+A lightweight ERP application designed for BiDi that includes project tracking, personnel allocation, customer relationship management, and role-based database access for educational purposes. The app is built using React, Node.js & Express, and PostgreSQL.
 
 <img width="1919" height="947" alt="Projects View" src="https://github.com/user-attachments/assets/ceedbf6e-750f-41ac-aaa2-2f28f4140e52" />
 
@@ -29,6 +29,14 @@ Default role is admin, that's why it is required. However, if you want functiona
 `BOB_USERNAME=bob_analyst`
 
 `BOB_PASSWORD="analyst_secure_pass"`
+
+The app assumes that you have postrgres running at localhost, port 5432, database name "bidi_db".
+
+You can change host and database names by introducing the following variables into .env file:
+
+`PG_HOST`
+
+`PG_DATABASE`
 
 After you have created .env, execute the following in the root folder:
 
